@@ -1,0 +1,4 @@
+---
+collections:
+roles:
+  - name: "ansible-network.network-engine"
