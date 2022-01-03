@@ -20,9 +20,9 @@ RUN apt-get update && apt-get install -y git sshpass
 FROM base AS test
 
 # Copy in the application code
-COPY . .
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-interaction --no-ansi --no-root
+COPY . .
 
 # Simple tests
 RUN echo 'Running Flake8' && \

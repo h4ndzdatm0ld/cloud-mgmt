@@ -1,0 +1,14 @@
+---
+
+- name: "GET EC2 INFO"
+  hosts: "localhost"
+  remote_user: "htinoco"
+  gather_facts: false
+
+  tasks:
+    - name: "GATHER EC2 INFO"
+      amazon.aws.ec2_instance_info:
+      register: "ec2_info"
+    - name: "GET EC2 DETAILS"
+      debug:
+        var: "ec2_info"

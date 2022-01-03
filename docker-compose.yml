@@ -6,12 +6,16 @@ services:
       target: "test"
       context: "."
   cli:
+    env_file:
+      - ".env"
     build:
       target: "cli"
       context: "."
     network_mode: "host"
     environment:
-      ENV_EXAMPLE: "${ENV_EXAMPLE}"
+      AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
+      AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
+      AWS_REGION: "${AWS_REGION}"
     volumes:
       - "./:/usr/src/app"
     image: "${COMMIT_IMAGE:-h4ndzdatm0ld/aws-mgmt:latest}"
