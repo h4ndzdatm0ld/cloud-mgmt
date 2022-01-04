@@ -1,8 +1,8 @@
+# docker-compose run cli playbooks/pb.get-ec2-info.yml
 ---
 
 - name: "GET EC2 INFO"
   hosts: "localhost"
-  remote_user: "htinoco"
   gather_facts: false
 
   tasks:
