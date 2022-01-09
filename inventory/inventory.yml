@@ -1,0 +1,10 @@
+---
+web:
+  hosts:
+    web01.example.com:
+      zone: "us-east-1a"
+    web02.example.com:
+      zone: "us-east-1b"
+  vars:
+    ansible_user: "ubuntu"
+    ansible_ssh_private_key_file: "/tmp/lightsail-key.cer"

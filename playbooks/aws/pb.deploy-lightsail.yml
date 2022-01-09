@@ -1,0 +1,36 @@
+# - hosts: "localhost"
+#   gather_facts: no
+#   vars:
+#     region: "us-west-1"
+#     blueprint: "ubuntu_20_04"
+#     bundle: "nano_2_0"
+#   tasks:
+
+#   - name: Download Default Key Pair
+#     shell: "aws --region {{ region }} lightsail download-default-key-pair --output text --query privateKeyBase64 > /tmp/lightsail-key.cer"
+
+#   - name: Modify Private Key Permissions
+#     command: "chmod 600 /tmp/lightsail-key.cer"
+
+#   - name: Create Lightsail VPS Instance
+#     community.aws.lightsail:
+#       name: "{{ item }}"
+#       region: "{{ region }}"
+#       zone: "{{ hostvars[item].zone }}"
+#       blueprint_id: "{{ blueprint }}"
+#       bundle_id: "{{ bundle }}"
+#       user_data: "sudo apt update"
+#       state: present
+#     with_inventory_hostnames:
+#       - web
+#     register: instance_result
+
+#   - name: Save IP and hostname to local hosts file /etc/hosts
+#     become: yes
+#     lineinfile:
+#       path: /etc/hosts
+#       regexp: '.*{{ item.instance.name }}$'
+#       line: "{{ item.instance.public_ip_address }}  {{ item.instance.name }}"
+#     with_items: "{{ instance_result.results }}"
+
+# # TODO: Add mount docker-compose to a place for key cert

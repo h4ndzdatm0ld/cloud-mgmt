@@ -1,0 +1,26 @@
+---
+- hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - name: "GET IMAGES INFO"
+      community.digitalocean.digital_ocean_image_info:
+        image_type: "all"
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+      register: "image_names"
+    - debug:
+        var: "image_names"
+
+    - name: "GET DROPLET SNAPSHOTS"
+      community.digitalocean.digital_ocean_snapshot_info:
+        snapshot_type: "droplet"
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+      register: "snapshot_info"
+    - debug:
+        var: "snapshot_info"
+
+    - name: "GET SSH KEY INFO"
+      community.digitalocean.digital_ocean_sshkey_info:
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+      register: "ssh_keys"
+    - debug:
+        var: "ssh_keys"

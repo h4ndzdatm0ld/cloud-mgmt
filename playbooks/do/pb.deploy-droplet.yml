@@ -1,0 +1,36 @@
+---
+- hosts: "localhost"
+  gather_facts: false
+  tasks:
+    - name: "CREATE DROPLET"
+      community.digitalocean.digital_ocean_droplet:
+        state: "present"
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+        name: "nautobot-droplet"
+        size: "s-1vcpu-2gb"
+        region: "nyc3"
+        image: "99396014"
+        ssh_keys: ["32845985", "32808048"]
+      register: "dropplet_deployment"
+    - debug:
+        var: "dropplet_deployment"
+
+    - name: "SLEEP 30"
+      wait_for:
+        timeout: 30
+      delegate_to: "localhost"
+
+    - name: "GET DROPLET INFO TO GET IP"
+      community.digitalocean.digital_ocean_droplet_info:
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+        id: "{{ dropplet_deployment['data']['droplet']['id'] }}"
+      register: "droplet_info"
+    - debug:
+        var: "droplet_info"
+
+    - name: "SHOW DROPLET INFO"
+      ansible.builtin.debug:
+        msg: |
+          "Droplet ID is {{ droplet_info.data[0]['id'] }}"
+          "First Public IPv4 is {{ (droplet_info.data.0.networks.v4 | selectattr('type', 'equalto', 'public')).0.ip_address | default('<none>', true) }}"
+          "First Private IPv4 is {{ (droplet_info.data.0.networks.v4 | selectattr('type', 'equalto', 'private')).0.ip_address | default('<none>', true) }}"
