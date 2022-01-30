@@ -157,7 +157,7 @@ dmypy.json
 
 # Directories potentially created on remote AFP share
 .AppleDB
-.AppleDesktop
+.AppleDesktop=-p0'
 Network Trash Folder
 Temporary Items
 .apdisk

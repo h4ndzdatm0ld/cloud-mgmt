@@ -1,3 +1,4 @@
+# docker-compose run cli playbooks/do/pb.deploy-droplet.yml
 ---
 - hosts: "localhost"
   gather_facts: false
