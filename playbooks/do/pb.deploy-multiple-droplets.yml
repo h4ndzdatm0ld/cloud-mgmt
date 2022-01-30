@@ -43,15 +43,3 @@
 
       register: "droplet_deployment"
       loop: "{{ roster['students'] }}"
-
-    - name: "SLEEP 30 BEFORE GETTING IP INFORMATION FOR DROPLET"
-      wait_for:
-        timeout: 30
-      delegate_to: "localhost"
-
-    - name: "GET DROPLET INFO TO GET IP"
-      community.digitalocean.digital_ocean_droplet_info:
-        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
-        id: "{{ item['data']['droplet']['id'] }}"
-      register: "droplet_info"
-      loop: "{{ droplet_deployment['results'] }}"
