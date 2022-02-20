@@ -313,3 +313,5 @@ id_rsa
 *tfstate*
 **.terraform/
 *.terraform/
+**providers/
+providers/
