@@ -311,3 +311,5 @@ id_rsa
 
 # Terraform
 *tfstate*
+**.terraform/
+*.terraform/
