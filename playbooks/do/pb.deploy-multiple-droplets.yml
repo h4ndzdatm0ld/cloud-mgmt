@@ -1,0 +1,45 @@
+# docker-compose run cli playbooks/do/pb.deploy-multiple-droplets.yml --extra-vars "@playbooks/vars/roster.json"
+---
+- hosts: "localhost"
+  gather_facts: false
+  vars:
+    ntc_user_password: "{{ lookup('env', 'NTC_USER_PASSWORD') }}"
+
+  tasks:
+    - name: "ENSURE STUDENTS LIST IS AVAILABLE"
+      ansible.builtin.assert:
+        that:
+          - "roster is defined"
+        fail_msg: "Student Roster JSON is not found. Ensure it's passed at execution with '--extra-vars @path/to/roster.json'"
+        success_msg: "Successfully located a list of students for this training."
+
+    - name: "CREATE STUDENT DROPLETS"
+      community.digitalocean.digital_ocean_droplet:
+        state: "present"
+        oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
+        name: "nautobot-droplet-{{ item }}"
+        size: "s-1vcpu-2gb"
+        region: "nyc3"
+        image: "101018962"
+        ssh_keys: ["32845985", "32808048"]
+        project_name: "NTC Nautobot Apps Training"
+        tags:
+          - "nautobot-apps-training"
+        user_data: |
+          #cloud-config
+          users:
+            - name: ntc
+              groups: sudo, nautobot
+              shell: /bin/bash
+              sudo: ['ALL=(ALL) NOPASSWD:ALL']
+              lock_passwd: false
+              sudo: true
+              ssh_redirect_user: false
+              plain_text_passwd: "{{ ntc_user_password }}"
+          runcmd:
+          - sed -i -e '$aAllowUsers ntc root' /etc/ssh/sshd_config
+          - sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+          - sudo systemctl restart sshd
+
+      register: "droplet_deployment"
+      loop: "{{ roster['students'] }}"

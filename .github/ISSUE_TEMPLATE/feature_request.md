@@ -6,7 +6,7 @@ about: Propose a new feature or enhancement
 
 ### Environment
 * Ansible version:  <!-- Example: 2.9.2 -->
-* aws-mgmt version:  <!-- Example: 1.0.0 -->
+* cloud-mgmt version:  <!-- Example: 1.0.0 -->
 
 <!--
     Describe in detail the new functionality you are proposing.

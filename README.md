@@ -1,54 +1,41 @@
-# Ansible Project: `AWS Mgmt`
+# Personal Project: `Cloud Mgmt`
 
-AWS Management
+AWS & Digital Ocean Management via Terraform & Ansible
 
 ## Requirements
 
-- Ansible >= 2.9
+- Docker
+- Docker-Compose
 
+# Terraform & Ansible in Docker
 
-**Collections:**
-
-
-**Roles:**
-- `ansible-network.network-engine`
+Terraform & Ansible are using a volume mount and are executed all inside of a docker container.
 
 ---
+# Env Variables
 
-## Project features
-
-
-- [Roles](roles/README.md)
-- [Modules](plugins/modules/README.md)
-- [Filters](plugins/filters/README.md)
-
----
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+REMOTE_USER=
+DO_TOKEN=
+TF_DO_TOKEN=
+TF_VAR_AWS_ACCESS_KEY_ID=
+TF_VAR_AWS_SECRET_ACCESS_KEY=
+NTC_USER_PASSWORD=
 
 ## Examples
 
-TBD
+### Running Terraform
 
----
+Initialize
 
-## Testing
-
-For testing guidelines see explanation see [Testing](tests/README.md)
-
----
-
-## Development and Contribution Guidelines
-
-It is a standard Ansible Project. So best practices are found [here](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html).
-
-Steps:
-
-### Test project
-
-After creation/modifications of roles, playbooks, or other modules are done, build and install the collection locally.
-
-```shell
-invoke build
-invoke local-install
+```bash
+docker-compose run terraform -chdir=terraform-plans/do-droplet/ init
 ```
 
-Perform tests locally before commiting and generating a PR for review.
+Plan
+
+```bash
+docker-compose run terraform -chdir=terraform-plans/do-droplet/ validate
+```
