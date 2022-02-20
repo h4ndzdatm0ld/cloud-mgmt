@@ -1,12 +1,12 @@
 ---
 name: 🐛 Bug Report
-about: Report a reproducible bug in the current release of aws-mgmt
+about: Report a reproducible bug in the current release of cloud-mgmt
 ---
 
 ### Environment
 * Ansible version:  <!-- Example: 2.9.2 -->
 * Python version:  <!-- Example: 3.7.7 -->
-* aws-mgmt version:  <!-- Example: 1.0.0 -->
+* cloud-mgmt version:  <!-- Example: 1.0.0 -->
 
 <!-- What did you expect to happen? -->
 ### Expected Behavior

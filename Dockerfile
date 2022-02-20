@@ -60,10 +60,8 @@ WORKDIR /usr/src/app
 # COPY galaxy/requirements.yml galaxy-requirements.yml
 
 ENV ANSIBLE_COLLECTIONS_PATH /usr/share/ansible/collections
-ENV ANSIBLE_ROLES_PATH /usr/share/ansible/roles
 
 COPY ./collections/requirements.yml ./collections/requirements.yml
-COPY ./roles/requirements.yml ./roles/requirements.yml
 
 # The conditional logic is here to cover the case where the user deletes the
 # collection or role requirements file, in the event that they don't need it.
@@ -71,10 +69,6 @@ COPY ./roles/requirements.yml ./roles/requirements.yml
 # add collections.
 RUN if [ -e collections/requirements.yml ]; then \
     ansible-galaxy collection install -r collections/requirements.yml; \
-    fi
-
-RUN if [ -e roles/requirements.yml ]; then \
-    ansible-galaxy install -r roles/requirements.yml; \
     fi
 
 #############
@@ -97,6 +91,11 @@ ENTRYPOINT ["ansible-playbook"]
 FROM base AS tform
 
 WORKDIR /usr/src/app
+
+COPY --from=base /usr/src/app /usr/src/app
+COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=base /usr/local/bin /usr/local/bin
+COPY --from=ansible /usr/share /usr/share
 
 COPY . .
 

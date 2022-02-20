@@ -20,7 +20,7 @@ services:
       NTC_USER_PASSWORD: "${NTC_USER_PASSWORD}"
     volumes:
       - "./:/usr/src/app"
-    image: "${COMMIT_IMAGE:-h4ndzdatm0ld/aws-mgmt:latest}"
+    image: "${COMMIT_IMAGE:-h4ndzdatm0ld/cloud-mgmt:latest}"
   terraform:
     env_file:
       - ".env"
@@ -32,5 +32,9 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       AWS_REGION: "${AWS_REGION}"
+      TF_VAR_DO_TOKEN: "${TF_DO_TOKEN}"
+      DO_TOKEN: "${DO_TOKEN}"
+      TF_VAR_AWS_ACCESS_KEY_ID: "${TF_VAR_AWS_ACCESS_KEY_ID}"
+      TF_VAR_AWS_SECRET_ACCESS_KEY: "${TF_VAR_AWS_SECRET_ACCESS_KEY}"
     volumes:
       - "./:/usr/src/app"

@@ -20,7 +20,7 @@
         name: "nautobot-droplet-{{ item }}"
         size: "s-1vcpu-2gb"
         region: "nyc3"
-        image: "99396014"
+        image: "101018962"
         ssh_keys: ["32845985", "32808048"]
         project_name: "NTC Nautobot Apps Training"
         tags:
@@ -29,7 +29,7 @@
           #cloud-config
           users:
             - name: ntc
-              groups: sudo
+              groups: sudo, nautobot
               shell: /bin/bash
               sudo: ['ALL=(ALL) NOPASSWD:ALL']
               lock_passwd: false

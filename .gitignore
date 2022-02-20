@@ -301,3 +301,13 @@ development/*.txt
 
 # Invoke overrides
 invoke.yml
+
+
+*.pem
+*.cert
+*.pub
+id_rsa
+
+
+# Terraform
+*tfstate*
