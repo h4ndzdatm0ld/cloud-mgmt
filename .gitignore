@@ -315,4 +315,5 @@ id_rsa
 **.terraform/
 *.terraform/
 **providers/
-providers/
+terraform-plans/simple-ec2/.terraform/providers/
+terraform-plans/do-droplet/.terraform/providers/
