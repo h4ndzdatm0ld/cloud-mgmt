@@ -31,3 +31,9 @@ provider "digitalocean" {
 data "digitalocean_ssh_key" "devpop" {
   name = "devpop"
 }
+
+variable "roster" {
+  description = "Create Droplet from student names"
+  type        = list(string)
+  default     = ["htinoco", "gmuller"]
+}
