@@ -26,7 +26,7 @@ exclude = '''
 '''
 
 [tool.poetry]
-name = "aws-mgmt"
+name = "cloud-mgmt"
 version = "0.1.0"
 description = "AWS Management"
 authors = ["Hugo Tinoco <hugotinoco@icloud.com>"]

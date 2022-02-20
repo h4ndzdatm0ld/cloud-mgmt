@@ -157,7 +157,7 @@ dmypy.json
 
 # Directories potentially created on remote AFP share
 .AppleDB
-.AppleDesktop
+.AppleDesktop=-p0'
 Network Trash Folder
 Temporary Items
 .apdisk
@@ -301,3 +301,17 @@ development/*.txt
 
 # Invoke overrides
 invoke.yml
+
+
+*.pem
+*.cert
+*.pub
+id_rsa
+
+
+# Terraform
+*tfstate*
+**.terraform/
+*.terraform/
+**providers/
+providers/
