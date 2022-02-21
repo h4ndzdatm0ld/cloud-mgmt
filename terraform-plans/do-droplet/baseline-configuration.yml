@@ -22,4 +22,7 @@
       apt:
         pkg:
           - "tree"
+<<<<<<< HEAD
       become: true
+=======
+>>>>>>> 312aa16a1344e800b2284be5e94b956834ae3ecc

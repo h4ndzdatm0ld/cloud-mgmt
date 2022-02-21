@@ -311,9 +311,16 @@ id_rsa
 
 # Terraform
 *tfstate*
+<<<<<<< HEAD
 *.tfstate
 **.terraform/
 *.terraform/
 **providers/
 terraform-plans/simple-ec2/.terraform/providers/
 terraform-plans/do-droplet/.terraform/providers/
+=======
+**.terraform/
+*.terraform/
+**providers/
+providers/
+>>>>>>> 312aa16a1344e800b2284be5e94b956834ae3ecc

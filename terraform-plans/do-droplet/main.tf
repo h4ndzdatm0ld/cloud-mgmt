@@ -27,7 +27,11 @@ resource "digitalocean_droplet" "nautobot-apps" {
 
 output "droplet_ip_addresses" {
   value = {
+<<<<<<< HEAD
     for droplet in digitalocean_droplet.nautobot-apps :
+=======
+    for droplet in digitalocean_droplet.web :
+>>>>>>> 312aa16a1344e800b2284be5e94b956834ae3ecc
     droplet.name => droplet.ipv4_address
   }
 }
