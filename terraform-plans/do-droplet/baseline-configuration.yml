@@ -2,15 +2,21 @@
 - become: true
   hosts: "all"
   name: "Baseline Configuration"
-  tasks:
-    - name: "Add the user 'htinoco' and add it to 'sudo'"
-      user:
-        name: "htinoco"
-        group: "sudo"
+  vars:
+    ntc_user_password: "{{ lookup('env', 'NTC_USER_PASSWORD') }}"
 
-    - name: "Add SSH key to 'htinoco'"
+  tasks:
+    - name: "Add the user 'ntc' and add it to 'sudo'"
+      user:
+        name: "ntc"
+        groups:
+          - "sudo"
+          - "nautobot"
+        password: "{{ ntc_user_password }}"
+
+    - name: "Add SSH key to 'ntc'"
       authorized_key:
-        user: "htinoco"
+        user: "ntc"
         state: "present"
         key: "{{ lookup('file', pub_key) }}"
 
@@ -22,7 +28,13 @@
       apt:
         pkg:
           - "tree"
-<<<<<<< HEAD
       become: true
-=======
->>>>>>> 312aa16a1344e800b2284be5e94b956834ae3ecc
+
+    - name: Baseline
+      ansible.builtin.shell: "{{ item }}"
+      loop:
+        - sed -i -e '$aAllowUsers ntc root' /etc/ssh/sshd_config
+        - sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+        - sudo systemctl restart sshd
+        - sed -i -e '$antc  ALL=(ALL) NOPASSWD:ALL' /etc/sudoers
+      become: true

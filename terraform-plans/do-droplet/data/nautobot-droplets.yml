@@ -9,8 +9,4 @@ users:
     ssh_redirect_user: false
     plain_text_passwd: "{{ NTC_USER_PASSWORD }}"
 runcmd:
-- sed -i -e '$aAllowUsers ntc root' /etc/ssh/sshd_config
-- sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
-- sudo systemctl restart sshd
-- sed -i -e '$antc  ALL=(ALL) NOPASSWD:ALL' /etc/sudoers
-- apt-get -y install tree
+
