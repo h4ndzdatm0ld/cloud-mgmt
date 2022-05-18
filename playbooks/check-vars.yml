@@ -1,0 +1,34 @@
+---
+- hosts: "device-rtr-1"
+  gather_facts: false
+  tasks:
+    # - name: "Include vars of stuff.yaml into the 'stuff' variable (2.2)."
+    #   include_vars:
+    #     dir: "../vars"
+    #     extensions:
+    #       - "yml"
+
+    - name: "Load var files"
+      include_vars:
+        file: "{{ item }}"
+        # name: "{{ item|basename|splitext|first }}"
+      with_fileglob:
+        - "../vars/dcam/sites/somesite/devices/{{ inventory_hostname }}/*.yml"
+        - "../vars/dcam/all/*.yml"
+
+    # - name: Load data
+    #   run_once: true
+    #   set_fact:
+    #     sot_vars: "{{ sot_vars|default([]) + [lookup('file', item) | from_yaml] }}"
+    #   with_fileglob:
+    #     - "../vars/dcam/devices/*.yml"
+    #     - "../vars/dcam/sites/*.yml"
+
+    # - name: Combine variables with prefix enabled_services
+    #   debug:
+    #     msg: "{{ hostvars[inventory_hostname].keys() | map('regex_search', 'device-rtr-1.*') | select('string') | list }}"
+    #   tags:
+    #     - vars
+    - name: "DEBUG"
+      debug:
+        msg: "{{ hostvars[inventory_hostname]}}"

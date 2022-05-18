@@ -1,0 +1,13 @@
+---
+- hosts: "192.168.100.132"
+  gather_facts: false
+  tasks:
+    - name: "Set Windows description, owner and organization"
+      community.windows.win_computer_description:
+        description: "AVIFI BOX"
+        owner: "Administrator"
+        organization: "Avifi"
+        register: "result"
+    - name: "DEBUG"
+      debug:
+        var: "{{ result }}"

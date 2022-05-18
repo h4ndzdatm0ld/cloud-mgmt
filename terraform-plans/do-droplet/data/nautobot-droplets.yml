@@ -1,8 +1,9 @@
 #cloud-config
+# yamllint disable
 users:
-  - name: ntc
-    groups: sudo, nautobot
-    shell: /bin/bash
+  - name: "ntc"
+    groups: "sudo, nautobot"
+    shell: "/bin/bash"
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     lock_passwd: false
     sudo: true

@@ -1,10 +1,16 @@
 ---
 web:
   hosts:
-    web01.example.com:
-      zone: "us-east-1a"
-    web02.example.com:
-      zone: "us-east-1b"
+    # web01.example.com:
+    #   zone: "us-east-1a"
+    # web02.example.com:
+    #   zone: "us-east-1b"
+    device-rtr-1:
+      ansible_host: localhost
+      ansible_user: "Administrator"
+      ansible_password: "Ht120288@v1"
+      ansible_connection: "winrm"
+      ansible_winrm_transport: "basic"
   vars:
     ansible_user: "ubuntu"
     ansible_ssh_private_key_file: "/tmp/lightsail-key.cer"

@@ -30,11 +30,11 @@
           - "tree"
       become: true
 
-    - name: Baseline
+    - name: "Baseline"
       ansible.builtin.shell: "{{ item }}"
       loop:
-        - sed -i -e '$aAllowUsers ntc root' /etc/ssh/sshd_config
-        - sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
-        - sudo systemctl restart sshd
-        - sed -i -e '$antc  ALL=(ALL) NOPASSWD:ALL' /etc/sudoers
+        - "sed -i -e '$aAllowUsers ntc root' /etc/ssh/sshd_config"
+        - "sed -i '/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes' /etc/ssh/sshd_config"
+        - "sudo systemctl restart sshd"
+        - "sed -i -e '$antc  ALL=(ALL) NOPASSWD:ALL' /etc/sudoers"
       become: true

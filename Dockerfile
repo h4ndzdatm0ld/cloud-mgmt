@@ -1,7 +1,7 @@
 ##############
 # Dependencies
 FROM python:3.8 as base
-
+ARG DOCKER_DEFAULT_PLATFORM=linux/amd64
 WORKDIR /usr/src/app
 
 # Install poetry for dep management
@@ -82,26 +82,26 @@ WORKDIR /usr/src/app
 COPY --from=base /usr/src/app /usr/src/app
 COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=base /usr/local/bin /usr/local/bin
-COPY --from=ansible /usr/share /usr/share
+# COPY --from=ansible /usr/share /usr/share
 
 COPY . .
 
 ENTRYPOINT ["ansible-playbook"]
 
-FROM base AS tform
+# FROM base AS tform
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
-COPY --from=base /usr/src/app /usr/src/app
-COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
-COPY --from=base /usr/local/bin /usr/local/bin
-COPY --from=ansible /usr/share /usr/share
+# COPY --from=base /usr/src/app /usr/src/app
+# COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+# COPY --from=base /usr/local/bin /usr/local/bin
+# # COPY --from=ansible /usr/share /usr/share
 
-COPY . .
+# COPY . .
 
-RUN apt-get update && apt-get install -y gnupg software-properties-common curl awscli
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN apt-get update && apt-get install terraform
+# RUN apt-get update && apt-get install -y gnupg software-properties-common curl awscli
+# RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+# RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+# RUN apt-get update && apt-get install terraform
 
-ENTRYPOINT ["terraform"]
+# ENTRYPOINT ["terraform"]

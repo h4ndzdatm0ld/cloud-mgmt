@@ -36,6 +36,7 @@ python = "^3.8"
 ansible = "*"
 Jinja2 = "*"
 boto3 = "^1.20.27"
+pywinrm = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
 ansible-lint = "*"
@@ -44,9 +45,9 @@ bandit = "*"
 pylint = "*"
 pytest = "*"
 yamllint = "*"
-flake8 = "^4.0.1"
-black = "^21.12b0"
-pydocstyle = "^6.1.1"
+flake8 = "*"
+black = "*"
+pydocstyle = "*"
 
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.

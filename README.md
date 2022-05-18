@@ -7,12 +7,12 @@ AWS & Digital Ocean Management via Terraform & Ansible
 - Docker
 - Docker-Compose
 
-# Terraform & Ansible in Docker
+## Terraform & Ansible in Docker
 
 Terraform & Ansible are using a volume mount and are executed all inside of a docker container.
 
 ---
-# Env Variables
+## Env Variables
 
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
