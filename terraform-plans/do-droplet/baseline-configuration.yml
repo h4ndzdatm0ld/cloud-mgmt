@@ -1,3 +1,4 @@
+# yamllint disable
 ---
 - become: true
   hosts: "all"
@@ -29,7 +30,7 @@
         pkg:
           - "tree"
       become: true
-
+    # yammlint disable=quoted-strings
     - name: Baseline
       ansible.builtin.shell: "{{ item }}"
       loop:

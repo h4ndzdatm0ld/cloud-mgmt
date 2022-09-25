@@ -34,6 +34,7 @@ services:
       AWS_REGION: "${AWS_REGION}"
       TF_VAR_DO_TOKEN: "${TF_DO_TOKEN}"
       DO_TOKEN: "${DO_TOKEN}"
+      DO_PAT: "${DO_TOKEN}"
       TF_VAR_AWS_ACCESS_KEY_ID: "${TF_VAR_AWS_ACCESS_KEY_ID}"
       TF_VAR_AWS_SECRET_ACCESS_KEY: "${TF_VAR_AWS_SECRET_ACCESS_KEY}"
     volumes:
