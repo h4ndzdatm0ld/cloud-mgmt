@@ -1,4 +1,4 @@
-#cloud-config
+# cloud-config
 # yamllint disable
 users:
   - name: "ntc"
@@ -9,5 +9,4 @@ users:
     sudo: true
     ssh_redirect_user: false
     plain_text_passwd: "{{ NTC_USER_PASSWORD }}"
-runcmd:
 

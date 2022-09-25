@@ -1,5 +1,5 @@
 ---
-- hosts: "192.168.100.132"
+- hosts: "ad-serv-1"
   gather_facts: false
   tasks:
     - name: "Set Windows description, owner and organization"
@@ -7,7 +7,26 @@
         description: "AVIFI BOX"
         owner: "Administrator"
         organization: "Avifi"
-        register: "result"
+      register: "result"
     - name: "DEBUG"
       debug:
-        var: "{{ result }}"
+        var: "result"
+
+    # Read a CSV file without headers
+    - name: Read users from CSV file and return a list
+      community.general.read_csv:
+        path: users.csv
+        fieldnames: user_id,cluster_id
+        delimiter: ','
+      register: users
+      delegate_to: localhost
+      
+    # - name: "GET USERS"
+    #   community.windows.win_domain_user:
+    #     name: "HUGO"
+    #   register: "result"
+    # - name: "DEBUG WIN USERS"
+    #   debug:
+    #     var: "result"
+
+

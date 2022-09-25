@@ -1,5 +1,5 @@
 ---
 interfaces:
-  - name: eth1
+  - name: "eth1"
     options:
       access: true

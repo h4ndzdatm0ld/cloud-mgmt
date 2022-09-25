@@ -1,4 +1,0 @@
----
-bgp:
-  neighbors:
-    - address: 1.1.2.66
