@@ -13,6 +13,14 @@ terraform {
   }
 }
 
+variable "do_token" {
+  description = "DigitalOcean API token"
+}
+
+provider "digitalocean" {
+  token = var.do_token
+}
+
 resource "digitalocean_droplet" "do-dev-sf03" {
   image      = "ubuntu-22-04-x64"
   name       = "do-dev-sfo3"
