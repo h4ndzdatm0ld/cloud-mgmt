@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.3.0"
+  required_version = "~>1.2.4"
 
   required_providers {
     digitalocean = {
@@ -9,10 +9,13 @@ terraform {
   }
 }
 
-resource "digitalocean_droplet" "do-dev-tf" {
-  image     = "ubuntu-18-04-x64"
-  name      = "do-dev-tf"
-  region    = "sfo3"
-  size      = "s-1vcpu-1gb"
-  # user_data = file("terramino_app.yaml")
+resource "digitalocean_droplet" "do-dev-sf03" {
+  image      = "ubuntu-22-04-x64"
+  name       = "do-dev-sfo3"
+  region     = "sfo3"
+  size       = "s-1vcpu-1gb"
+  backups    = true
+  monitoring = true
+  ipv6       = true
+  ssh_keys   = ["34383489"]
 }
