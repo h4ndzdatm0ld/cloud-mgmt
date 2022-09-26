@@ -25,7 +25,7 @@ resource "digitalocean_droplet" "do-dev" {
   image      = "ubuntu-22-04-x64"
   name       = "do-dev"
   region     = "sfo3"
-  size       = "s-1vcpu-1gb"
+  size       = "s-1vcpu-2gb"
   backups    = true
   monitoring = true
   ipv6       = true
