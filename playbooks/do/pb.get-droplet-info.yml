@@ -5,10 +5,12 @@
   tasks:
     - name: "GET IMAGES INFO"
       community.digitalocean.digital_ocean_image_info:
-        image_type: "all"
+        image_type: "distribution"
         oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
       register: "image_names"
-    - debug:
+
+    - name: "SHOW IMAGE NAMES"
+      ansible.builtin.debug:
         var: "image_names"
 
     - name: "GET DROPLET SNAPSHOTS"
@@ -23,5 +25,7 @@
       community.digitalocean.digital_ocean_sshkey_info:
         oauth_token: "{{ lookup('ansible.builtin.env', 'DO_TOKEN') }}"
       register: "ssh_keys"
-    - debug:
+
+    - name: "DEBUG"
+      ansible.builtin.debug:
         var: "ssh_keys"

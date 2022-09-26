@@ -1,13 +1,17 @@
 ##############
 # Dependencies
-FROM python:3.8 as base
+FROM python:3.9 as base
 
 WORKDIR /usr/src/app
 
 # Install poetry for dep management
 RUN pip install -U pip
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-ENV PATH="$PATH:/root/.poetry/bin"
+
+RUN pip install -U pip  && \
+    curl -sSL https://install.python-poetry.org  | python3 -
+
+ENV PATH="/root/.local/bin:$PATH"
+
 RUN poetry config virtualenvs.create false
 
 # Install project manifest
@@ -75,33 +79,15 @@ RUN if [ -e collections/requirements.yml ]; then \
 # Final image
 #
 # This creates a runnable CLI container
-FROM python:3.8.7-slim AS cli
+FROM python:3.9-slim AS cli
 
 WORKDIR /usr/src/app
 
 COPY --from=base /usr/src/app /usr/src/app
-COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
+COPY --from=base /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 COPY --from=base /usr/local/bin /usr/local/bin
 COPY --from=ansible /usr/share /usr/share
 
 COPY . .
 
 ENTRYPOINT ["ansible-playbook"]
-
-FROM base AS tform
-
-WORKDIR /usr/src/app
-
-COPY --from=base /usr/src/app /usr/src/app
-COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
-COPY --from=base /usr/local/bin /usr/local/bin
-COPY --from=ansible /usr/share /usr/share
-
-COPY . .
-
-RUN apt-get update && apt-get install -y gnupg software-properties-common curl awscli
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN apt-get update && apt-get install terraform
-
-ENTRYPOINT ["terraform"]

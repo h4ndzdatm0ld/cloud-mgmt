@@ -4,7 +4,7 @@ build-backend = "poetry.masonry.api"
 
 [tool.black]
 line-length = 120
-target-version = ['py37']
+target-version = ['py39']
 include = '\.pyi?$'
 exclude = '''
 (
@@ -28,13 +28,12 @@ exclude = '''
 [tool.poetry]
 name = "cloud-mgmt"
 version = "0.1.0"
-description = "AWS Management"
+description = "Cloud Management with Ansible & Terraform"
 authors = ["Hugo Tinoco <hugotinoco@icloud.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-ansible = "*"
-Jinja2 = "*"
+python = "^3.9"
+ansible-core = "*"
 boto3 = "^1.20.27"
 
 [tool.poetry.dev-dependencies]
@@ -44,9 +43,9 @@ bandit = "*"
 pylint = "*"
 pytest = "*"
 yamllint = "*"
-flake8 = "^4.0.1"
-black = "^21.12b0"
-pydocstyle = "^6.1.1"
+flake8 = "*"
+black = "*"
+pydocstyle = "*"
 
 [tool.pylint.basic]
 # No docstrings required for private methods (Pylint default), or for test_ functions, or for inner Meta classes.
