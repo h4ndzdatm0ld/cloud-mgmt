@@ -1,6 +1,10 @@
 terraform {
-  required_version = "~>1.2.4"
-
+  cloud {
+    organization = "crunchy-org"
+    workspaces {
+      name = "crunchy-iac"
+    }
+  }
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
