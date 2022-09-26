@@ -21,9 +21,9 @@ provider "digitalocean" {
   token = var.do_token
 }
 
-resource "digitalocean_droplet" "do-dev-sf03" {
+resource "digitalocean_droplet" "do-dev" {
   image      = "ubuntu-22-04-x64"
-  name       = "do-dev-sfo3"
+  name       = "do-dev"
   region     = "sfo3"
   size       = "s-1vcpu-1gb"
   backups    = true
